@@ -35,9 +35,10 @@
   }
 
   *{box-sizing:border-box;}
-  html{scroll-padding-top: env(safe-area-inset-top,0px); scroll-behavior:smooth;}
+  html{scroll-padding-top: env(safe-area-inset-top,0px); scroll-behavior:smooth; overflow-x:hidden;}
   body{
     margin:0;
+    overflow-x:hidden;
     background:var(--bg);
     color:var(--cream);
     font-family:'Work Sans', system-ui, sans-serif;
@@ -60,7 +61,9 @@
   nav{
     position:sticky; top:0; z-index:20;
     padding-top: env(safe-area-inset-top,0px);
+    background:var(--bg);
     background:color-mix(in srgb, var(--bg) 88%, transparent);
+    -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
     border-bottom:1px solid var(--line);
   }
@@ -132,10 +135,17 @@
   .menu-item{
     display:flex; align-items:baseline; gap:10px; padding:14px 0; border-bottom:1px solid var(--line);
   }
-  .menu-item .name{font-family:'Fraunces',serif; font-size:19px; font-weight:500; white-space:nowrap;}
+  .menu-item .name{font-family:'Fraunces',serif; font-size:19px; font-weight:500; white-space:normal; flex:1 1 auto; min-width:0;}
   .menu-item .desc{color:var(--muted); font-size:14px; flex:1; min-width:120px;}
   .menu-item .leader{flex:1; border-bottom:1px dotted var(--line); margin-bottom:6px; min-width:20px;}
   .menu-item .price{font-family:'Fraunces',serif; font-size:17px; white-space:nowrap;}
+
+  @media (max-width:520px){
+    .menu-item{flex-wrap:wrap; row-gap:2px;}
+    .menu-item .leader{display:none;}
+    .menu-item .price{margin-left:auto; color:var(--mustard);}
+    .stats{grid-template-columns:1fr 1fr;}
+  }
 
   /* DELIVERY steps */
   .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:32px;}
@@ -353,7 +363,6 @@
 <footer>
   <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:12px;">
     <span>CHUTKO — školský projekt, Aplikovaná informatika PF UPJŠ</span>
-    <span>Táto webová stránka bola vytvorená pomocou AI</span>
     <span>© 2026</span>
   </div>
 </footer>
